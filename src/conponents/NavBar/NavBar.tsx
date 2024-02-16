@@ -1,22 +1,23 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
+import {PageData} from "../../type";
 
-const NavBar: React.FC = () => {
+interface Props{
+  pages: PageData[],
+}
+
+const NavBar: React.FC<Props> = ({pages}) => {
+
   return (
     <nav className="navbar navbar-expand">
       <ul className="navbar-nav">
-        <li className="nav-item">
-          <NavLink to={"/pages/home"} className="nav-link">Home</NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink to={"/pages/about"} className="nav-link">About</NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink to={"/pages/contact"} className="nav-link">Contact</NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink to={"/pages/divisions"} className="nav-link">Divisions</NavLink>
-        </li>
+        {pages.map((page, index) => {
+          return (
+            <li key={`${page.id}${index}`} className="nav-item">
+              <NavLink to={`/pages/${page.id}`} className="nav-link">{page.title}</NavLink>
+            </li>
+          );
+        }).reverse()}
       </ul>
     </nav>
   );
