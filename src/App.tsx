@@ -2,6 +2,7 @@ import Header from "./conponents/Header/Header";
 import {Route, Routes} from "react-router-dom";
 import Page from "./container/Page/Page";
 import Admin from "./container/Admin/Admin";
+import Footer from "./conponents/Footer/Footer";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           </Routes>
         </div>
       </main>
+      <Footer/>
     </div>
   );
 }
