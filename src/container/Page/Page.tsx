@@ -4,26 +4,17 @@ import {PageData} from "../../type";
 import axiosApi from "../../axiosApi";
 import Spinner from "../../conponents/Spinner/Spinner";
 
-const defaultState: PageData = {
-  id: "",
-  title: "",
-  content: "",
-};
 
 const Page: React.FC = () => {
   const {id} = useParams();
-  const [pageData, setPageData] = useState<PageData>(defaultState);
+  const [pageData, setPageData] = useState<PageData | null>(null);
   const [lauding, setLauding] = useState<boolean>(false);
 
   const fetchPageData = useCallback(async () => {
     try {
       setLauding(true);
       const {data: response} = await axiosApi.get<PageData | null>(`/${id}.json`);
-      if (response) {
-        setPageData(response);
-      } else {
-        setPageData(defaultState);
-      }
+      setPageData(response);
     } finally {
       setLauding(false);
     }
@@ -35,7 +26,10 @@ const Page: React.FC = () => {
 
   let pageContent = (
     <>
-      <div className={"alert alert-light  text-dark"}>{pageData.content}</div>)
+      {pageData
+        ? <div className={"alert alert-light  text-dark"}>{pageData.content}</div>
+        : <h1>Not found</h1>
+      }
     </>
   );
   if (lauding) pageContent = <Spinner/>;

@@ -1,6 +1,7 @@
 import Header from "./conponents/Header/Header";
 import {Route, Routes} from "react-router-dom";
 import Page from "./container/Page/Page";
+import Admin from "./container/Admin/Admin";
 
 function App() {
 
@@ -11,8 +12,10 @@ function App() {
         <div className={"container"}>
           <Routes>
             <Route path={"/pages/:id"} element={(<Page/>)}/>
-            <Route path={"/admin"} element={("Admin")}/>
-            <Route path={"*"} element={<h1 className={"text-white text-center mt-5"}>404</h1>}/>
+            <Route path={"/pages/admin"} element={(<Admin/>)}/>
+            <Route path={"*"} element={
+              <h1 className={"text-white text-center mt-5"}>Not found 404</h1>
+            }/>
           </Routes>
         </div>
       </main>
